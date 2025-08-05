@@ -1,167 +1,236 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-// INTERFAZ que define un comportamiento genérico que deben implementar las clases que deseen ser "Imprimibles".
-interface Imprimible{
+// Interfaz que define un contrato: todo objeto Imprimible debe implementar el método imprimir()
+interface Imprimible {
     void imprimir();
 }
 
-// CLASE ABSTRACTA que representa un empleado genérico.
-// Aplica el concepto de ABSTRACCIÓN y también de ENCAPSULAMIENTO.
-abstract class Empleado implements Imprimible{
-
-    // Atributos PRIVADOS: solo accesibles mediante getters (Encapsulamiento).
+// Clase abstracta que representa la estructura base común de cualquier tipo de empleado.
+// Aplica los principios de abstracción y encapsulamiento.
+abstract class Empleado implements Imprimible {
     private String nombre;
     private String apellido;
     private int dni;
-    private String tipo;
+    private String tipo; // Ej: Programador, Diseñador
+    private int legajo;  // Código identificador único de 6 dígitos
 
-    // Constructor de la clase Empleado
-    public Empleado(String nombre, String apellido, int dni, String tipo){
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.dni = dni;
+    // Constructor que recibe el tipo de empleado y utiliza Scanner para pedir el resto de los datos
+    public Empleado(String tipo, Scanner scanner) {
+        System.out.print("Ingrese legajo (6 dígitos): ");
+        this.legajo = Integer.parseInt(scanner.nextLine());
+
+        System.out.print("Ingrese nombre: ");
+        this.nombre = scanner.nextLine();
+
+        System.out.print("Ingrese apellido: ");
+        this.apellido = scanner.nextLine();
+
+        System.out.print("Ingrese DNI: ");
+        this.dni = Integer.parseInt(scanner.nextLine());
+
         this.tipo = tipo;
     }
 
-    // Metodo abstracto (Polimorfismo): obliga a que las subclases definan su propia tarea.
-    public abstract void tarea();
+    // Métodos de acceso (getters) para encapsulamiento
+    public int getLegajo() {
+        return legajo;
+    }
 
-    // MÉTODOS GETTERS: permiten acceder a los atributos privados.
-    public String getNombre(){
+    public String getNombre() {
         return nombre;
     }
-    public String getApellido(){
+
+    public String getApellido() {
         return apellido;
     }
+
     public int getDni() {
         return dni;
     }
+
     public String getTipo() {
         return tipo;
     }
 
-    // Metodo de la interfaz Imprimible: imprime datos generales del empleado.
-    public void imprimir(){
+    // Implementación de la interfaz Imprimible: muestra los datos del empleado
+    @Override
+    public void imprimir() {
+        System.out.println("Legajo: " + legajo);
         System.out.println("Nombre: " + nombre);
         System.out.println("Apellido: " + apellido);
         System.out.println("DNI: " + dni);
         System.out.println("Tipo: " + tipo);
     }
 
+    // Método abstracto que será implementado por cada subclase (polimorfismo)
+    public abstract void tarea();
 }
 
-// CLASES HIJAS: Cada una hereda de Empleado y redefine el metodo tarea().
-// Aplican los conceptos de HERENCIA y POLIMORFISMO.
-class Programador extends Empleado{
+// Cada clase hija representa un tipo de empleado específico
+// Se aplica herencia y polimorfismo (sobrescriben el método tarea)
 
-    public Programador(String nombre, String apellido, int dni, String tipo){
-        super(nombre, apellido, dni, tipo);
+// Programador hereda de Empleado
+class Programador extends Empleado {
+    public Programador(String tipo, Scanner scanner) {
+        super(tipo, scanner);
     }
 
-    // Reimplementa el metodo tarea con una acción específica.
-    public void tarea(){
+    // Implementación concreta de la tarea
+    @Override
+    public void tarea() {
         System.out.println("Tarea: Programar");
     }
 }
-class Diseniador extends Empleado{
 
-    public Diseniador(String nombre, String apellido, int dni, String tipo){
-        super(nombre, apellido, dni, tipo);
+// Diseñador hereda de Empleado
+class Diseniador extends Empleado {
+    public Diseniador(String tipo, Scanner scanner) {
+        super(tipo, scanner);
     }
 
-    public void tarea(){
-        System.out.println("Tarea Diseñar");
+    @Override
+    public void tarea() {
+        System.out.println("Tarea: Diseñar");
     }
 }
-class Mecanico extends Empleado{
 
-    public Mecanico(String nombre, String apellido, int dni, String tipo){
-        super(nombre, apellido, dni, tipo);
+// Técnico hereda de Empleado
+class Tecnico extends Empleado {
+    public Tecnico(String tipo, Scanner scanner) {
+        super(tipo, scanner);
     }
 
-    public void tarea(){
+    @Override
+    public void tarea() {
         System.out.println("Tarea: Reparar");
     }
 }
-class Administrativo extends Empleado{
 
-    public Administrativo(String nombre, String apellido, int dni, String tipo){
-        super(nombre, apellido, dni, tipo);
+// Administrativo hereda de Empleado
+class Administrativo extends Empleado {
+    public Administrativo(String tipo, Scanner scanner) {
+        super(tipo, scanner);
     }
 
-    public void tarea(){
+    @Override
+    public void tarea() {
         System.out.println("Tarea: Administrar");
     }
 }
 
 public class Main {
 
-    // FUNCIÓN AUXILIAR para cargar un nuevo empleado desde la consola.
+    /**
+     * Método auxiliar para crear un nuevo empleado.
+     * Muestra un menú donde el usuario elige el tipo (1-4).
+     * Se utiliza polimorfismo para devolver la instancia correspondiente.
+     *
+     * @param scanner Objeto Scanner reutilizado
+     * @return Objeto Empleado (de tipo específico), o null si la opción es inválida
+     */
     public static Empleado cargarEmpleado(Scanner scanner) {
-        System.out.print("Ingrese nombre: ");
-        String nombre = scanner.nextLine();
+        System.out.println("Seleccione el tipo de empleado:");
+        System.out.println("1. Programador");
+        System.out.println("2. Diseñador");
+        System.out.println("3. Técnico");
+        System.out.println("4. Administrativo");
+        System.out.print("Ingrese una opción (1-4): ");
 
-        System.out.print("Ingrese apellido: ");
-        String apellido = scanner.nextLine();
+        int opcionTipo = Integer.parseInt(scanner.nextLine());
+        String tipoTexto;
 
-        System.out.print("Ingrese DNI: ");
-        int dni = scanner.nextInt();
-        scanner.nextLine();
-
-        System.out.print("Ingrese tipo (p, d, m, a): ");
-        String tipo = scanner.nextLine();
-
-        // POLIMORFISMO: se devuelve un objeto del tipo correspondiente, según la entrada.
-        switch (tipo) {
-            case "p":
-                return new Programador(nombre, apellido, dni, tipo);
-            case "d":
-                return new Diseniador(nombre, apellido, dni, tipo);
-            case "m":
-                return new Mecanico(nombre, apellido, dni, tipo);
-            case "a":
-                return new Administrativo(nombre, apellido, dni, tipo);
+        switch (opcionTipo) {
+            case 1:
+                tipoTexto = "Programador";
+                return new Programador(tipoTexto, scanner);
+            case 2:
+                tipoTexto = "Diseñador";
+                return new Diseniador(tipoTexto, scanner);
+            case 3:
+                tipoTexto = "Técnico";
+                return new Tecnico(tipoTexto, scanner);
+            case 4:
+                tipoTexto = "Administrativo";
+                return new Administrativo(tipoTexto, scanner);
             default:
-                System.out.println("Tipo inválido. No se creó empleado.");
+                System.out.println("Opción inválida.");
                 return null;
         }
     }
+
     public static void main(String[] args) {
-        // Scanner para entrada de datos.
         Scanner scanner = new Scanner(System.in);
+        ArrayList<Empleado> listaEmpleados = new ArrayList<>(); // Colección de empleados
+        int opcion;
 
-        // LISTA de empleados: estructura dinámica para almacenar objetos Empleado.
-        ArrayList<Empleado> list_Empleados = new ArrayList<>();
-
-        int seleccion;
-
-        // BUCLE DE CONTROL para mostrar menú
+        // Bucle principal del menú
         do {
+            System.out.println("\n--- MENÚ PRINCIPAL ---");
             System.out.println("1. Agregar empleado");
             System.out.println("2. Listar empleados");
-            System.out.println("3. Salir");
-            seleccion = scanner.nextInt();
-            scanner.nextLine(); // Limpia el buffer
+            System.out.println("3. Eliminar empleado por legajo");
+            System.out.println("4. Modificar empleado por legajo");
+            System.out.println("5. Salir");
+            System.out.print("Seleccione una opción: ");
 
-            if (seleccion == 1) {
-                Empleado nuevo = cargarEmpleado(scanner);
-                if (nuevo != null) {
-                    list_Empleados.add(nuevo);
-                }
-                System.out.println("Empleado agregado. Total: " + list_Empleados.size());
-                System.out.println();
+            opcion = Integer.parseInt(scanner.nextLine());
+
+            switch (opcion) {
+                case 1:
+                    // Agrega un nuevo empleado usando el menú
+                    Empleado nuevo = cargarEmpleado(scanner);
+                    if (nuevo != null) {
+                        listaEmpleados.add(nuevo);
+                        System.out.println("Empleado agregado.");
+                    }
+                    break;
+
+                case 2:
+                    // Lista todos los empleados con sus datos y tarea correspondiente
+                    System.out.println("\n--- LISTADO DE EMPLEADOS ---");
+                    for (Empleado e : listaEmpleados) {
+                        e.imprimir();  // Polimorfismo: todos implementan imprimir()
+                        e.tarea();     // Cada tipo tiene una tarea distinta
+                        System.out.println("-----------------------");
+                    }
+                    break;
+
+                case 3:
+                    // Elimina un empleado usando el legajo
+                    System.out.print("Ingrese legajo del empleado a eliminar: ");
+                    int legajoEliminar = Integer.parseInt(scanner.nextLine());
+                    boolean eliminado = listaEmpleados.removeIf(emp -> emp.getLegajo() == legajoEliminar);
+                    if (eliminado) {
+                        System.out.println("Empleado eliminado.");
+                    } else {
+                        System.out.println("No se encontró un empleado con ese legajo.");
+                    }
+                    break;
+
+                case 4:
+                    // Modifica un empleado eliminándolo y agregando uno nuevo en su lugar
+                    System.out.print("Ingrese legajo del empleado a modificar: ");
+                    int legajoModificar = Integer.parseInt(scanner.nextLine());
+                    Empleado nuevoEmpleado = cargarEmpleado(scanner);
+
+                    for (int i = 0; i < listaEmpleados.size(); i++) {
+                        if (listaEmpleados.get(i).getLegajo() == legajoModificar) {
+                            listaEmpleados.set(i, nuevoEmpleado);
+                            System.out.println("Empleado modificado.");
+                            break;
+                        }
+                    }
+                    break;
+
+                case 5:
+                    System.out.println("Saliendo del sistema.");
+                    break;
+
+                default:
+                    System.out.println("Opción inválida.");
             }
 
-            if (seleccion == 2) {
-                System.out.println("Listado de empleados:");
-                for (Empleado trabajador : list_Empleados) {
-                    trabajador.imprimir(); // Metodo de interfaz.
-                    trabajador.tarea(); // Metodo redefinido según clase (polimorfismo).
-                    System.out.println();
-                }
-            }
-
-        } while (seleccion != 3);
+        } while (opcion != 5);
     }
 }
