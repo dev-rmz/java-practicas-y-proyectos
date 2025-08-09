@@ -1,6 +1,7 @@
 # 📚 Repositorio: Java - Prácticas y Proyectos
 
-Este repositorio está organizado para facilitar el estudio y desarrollo de proyectos en Java, con una estructura clara y separada por tipos de trabajos.
+Este repositorio está organizado para facilitar el estudio y desarrollo de proyectos en Java, con una estructura clara y
+ separada por tipos de trabajos.
 
 ---
 
@@ -21,12 +22,17 @@ java-practicas-y-proyectos/
 
 📌 Descripción de carpetas
 🧮 algoritmos-practica/
-Contiene diversas prácticas relacionadas con algoritmos, estructuras de datos y otros temas importantes de programación backend. Aquí se agrupan ejercicios variados por temas para fortalecer la lógica, comprensión y habilidades en distintas áreas de desarrollo.
+Contiene diversas prácticas relacionadas con algoritmos, estructuras de datos y otros temas importantes
+ de programación backend. Aquí se agrupan ejercicios variados por temas para fortalecer la lógica, comprensión
+ y habilidades en distintas áreas de desarrollo.
 
 🚀 proyectos-integradores/
-Incluye proyectos integradores, como el proyecto de gestión de empleados, que combinan varios conceptos y técnicas aprendidas para resolver problemas más complejos y reales.
+Incluye proyectos integradores, como el proyecto de gestión de empleados, que combinan varios conceptos 
+y técnicas aprendidas para resolver problemas más complejos y reales.
 
 🎨 portfolio-personal/
-Contiene mi portafolio personal, donde se muestran trabajos, proyectos y desarrollos personales que reflejan mis habilidades y experiencia.
+Contiene mi portafolio personal, donde se muestran trabajos, proyectos y desarrollos personales que reflejan 
+mis habilidades y experiencia.
 
-Cada subcarpeta dentro de algoritmos-practica/ y proyectos-integradores/ contiene su propio conjunto de archivos y estructuras específicas del proyecto.
+Cada subcarpeta dentro de algoritmos-practica/ y proyectos-integradores/ contiene su propio conjunto de archivos
+ y estructuras específicas del proyecto.
