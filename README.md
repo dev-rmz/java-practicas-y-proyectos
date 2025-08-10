@@ -10,15 +10,22 @@ Este repositorio está organizado para facilitar el estudio y desarrollo de proy
 ```plaintext
 java-practicas-y-proyectos/
 ├── algoritmos-practica/
-│   ├── Practica-Clases-Abstractas-e-Interfaces/
+│   ├── Practica-Analisis-de-algoritmos-Big-O/
+│   ├── Practica-Variables-Tipos-de-Datos-y-Condicionales/
+│   ├── Practica-Bucles-y-Estructuras-De-Control/
+│   ├── Practica-Arreglos-y-Colecciones-ArrayList/
+│   ├── Practica-Declaracion-y-recorrido-de-arrays/
+│   ├── Practica-Busqueda-en-arrays/
+│   ├── Practica-Operaciones-con-matrices/
+│   ├── Practica-Programacion-Orientada-a-Objetos/
 │   ├── Practica-Encapsulamiento-Herencia-Polimorfismo/
-│   ├── Practica-Nivel-1-Variables-Tipos-de-Datos-y-Condicionales/
-│   ├── Practica-Nivel-2-Bucles-y-Estructuras-De-Control/
-│   ├── Practica-Nivel-3-Arreglos-y-Colecciones-ArrayList/
-│   └── Practica-Nivel-4-Programacion-Orientada-a-Objetos/
+│   ├── Practica-Clases-Abstractas-e-Interfaces/
+│
 ├── proyectos-integradores/
 │   └── Proyecto-Integrador-Sistema-de-Gestion-de-Personal/
+│
 └── portfolio-personal/
+    └── [Repositorio] https://github.com/dev-rmz/portfolio.git
 
 📌 Descripción de carpetas
 🧮 algoritmos-practica/
