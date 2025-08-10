@@ -1,69 +1,94 @@
-
-/* Puedo proponerte uno donde crees una clase abstracta Empleado y dos
-subclases(Programador, Diseñador) que implementen su propio método trabajar().
-También podríamos sumar una interfaz como Imprimible. */
-import java.util.ArrayList;
 import java.util.List;
 
+// Clase abstracta que representa un empleado genérico
 abstract class Empleado {
 
     protected String nombre;
 
-    public Empleado(String nombre){
+    // Constructor para inicializar el nombre del empleado
+    public Empleado(String nombre) {
         this.nombre = nombre;
     }
 
+    // Método abstracto que obliga a las subclases a definir cómo trabajan
     public abstract void trabajar();
-
 }
-interface Imprimible{
+
+// Interfaz que define un método para imprimir información
+interface Imprimible {
     void imprimir();
 }
 
-class Programador extends Empleado implements Imprimible{
+// Clase Programador que extiende Empleado e implementa Imprimible
+class Programador extends Empleado implements Imprimible {
 
-    public Programador(String nombre){
+    public Programador(String nombre) {
         super(nombre);
     }
-    public void trabajar(){
-        System.out.println(nombre + " esta programando");
-    }
-    public void imprimir(){
-        System.out.println(nombre + "es un programador");
+
+    // Implementación concreta del método trabajar para programador
+    @Override
+    public void trabajar() {
+        System.out.println(nombre + " está programando");
     }
 
+    // Implementación del método imprimir de la interfaz
+    @Override
+    public void imprimir() {
+        System.out.println(nombre + " es un programador");
+    }
 }
-class Diseniador extends Empleado implements Imprimible{
 
-    public Diseniador(String nombre){
+// Clase Diseñador que extiende Empleado e implementa Imprimible
+class Diseniador extends Empleado implements Imprimible {
+
+    public Diseniador(String nombre) {
         super(nombre);
     }
-    public void trabajar(){
-        System.out.println(nombre + " esta diseñando");
+
+    // Implementación concreta del método trabajar para diseñador
+    @Override
+    public void trabajar() {
+        System.out.println(nombre + " está diseñando");
     }
-    public void imprimir(){
+
+    // Implementación del método imprimir de la interfaz
+    @Override
+    public void imprimir() {
         System.out.println(nombre + " es un diseñador");
     }
 }
-class Mecanico implements Imprimible{
 
-    public void imprimir(){
-        System.out.println("Soy un mecanico independiente");
+// Clase Mecanico que no extiende Empleado pero implementa Imprimible
+class Mecanico implements Imprimible {
+
+    // Implementación del método imprimir para mecánico
+    @Override
+    public void imprimir() {
+        System.out.println("Soy un mecánico independiente");
     }
 }
 
 public class Main {
+
     public static void main(String[] args) {
 
+        // Crear instancias de Programador y Diseñador con nombres
         Programador trabajador1 = new Programador("Juan");
         Diseniador trabajador2 = new Diseniador("Nico");
-        Mecanico trabajador3 = new Mecanico(); //probando interface sin herencia
 
-        trabajador1.trabajar(); //empleado programador trabajando
-        trabajador2.trabajar(); //empleado diseñador trabajando
+        // Crear instancia de Mecanico (no hereda de Empleado)
+        Mecanico trabajador3 = new Mecanico();
 
-        List<Imprimible> lista_objetos_imprimibles = List.of(trabajador1, trabajador2, trabajador3);
-        for (Imprimible i : lista_objetos_imprimibles){
+        // Llamar al método trabajar de cada empleado
+        trabajador1.trabajar();
+        trabajador2.trabajar();
+
+        // Crear una lista de objetos que implementan Imprimible
+        List<Imprimible> listaObjetosImprimibles = List.of(trabajador1, trabajador2, trabajador3);
+
+        // Recorrer la lista y llamar al método imprimir de cada objeto
+        for (Imprimible i : listaObjetosImprimibles) {
             i.imprimir();
         }
     }
