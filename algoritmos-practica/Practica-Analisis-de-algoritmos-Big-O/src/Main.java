@@ -1,102 +1,95 @@
 public class Main {
+
+    // Variables de ejemplo para probar los ejercicios
+    static int n = 10;
+    static int m = 5;
+
     public static void main(String[] args) {
-        //Ejercicio 1 ¿Cuál es la complejidad temporal? Justificá.
+
+        // Ejercicio 1: Complejidad O(n)
+        System.out.println("Ejercicio 1: Complejidad O(n)");
         for (int i = 0; i < n; i++) {
             System.out.println(i);
         }
         /*
-          Complejidad temporal: O(n)
-          Justificación: El bucle for comienza en i = 0 y se ejecuta mientras i < n, incrementándose en 1 en cada
-          iteración. Esto provoca que el número total de iteraciones sea proporcional a n.
-          Dentro del bucle solo hay una operación de tiempo constante (System.out.println(i)), por lo que el tiempo
-          total de ejecución crece linealmente con el valor de n.
+         * Complejidad temporal: O(n)
+         * Justificación: El bucle se ejecuta n veces y dentro de cada iteración se realiza una operación constante.
          */
 
-        //Ejercicio 2 ¿Cuál es la complejidad temporal? ¿Por qué?
-
+        // Ejercicio 2: Complejidad O(n²)
+        System.out.println("\nEjercicio 2: Complejidad O(n²)");
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 System.out.println(i + j);
             }
         }
-       /*
-        Complejidad temporal: O(n²)
-        Justificación: El primer bucle for recorre n elementos, realizando una iteración por cada incremento de i. El
-        segundo bucle anidado también recorre n elementos para cada valor de i. Esto significa que por cada una de las
-        n iteraciones externas, se ejecutan n iteraciones internas, resultando en n × n = n² operaciones. Dentro del
-        bucle interno solo se realiza una operación de tiempo constante (System.out.println(i + j)), por lo que no
-        afecta la complejidad asintótica.
-        El tiempo total de ejecución crece de forma cuadrática con respecto a n.
-        */
+        /*
+         * Complejidad temporal: O(n²)
+         * Justificación: Dos bucles anidados que recorren n elementos cada uno, resultando en n * n iteraciones.
+         */
 
-        //Ejercicio 3: Si n y m son independientes, ¿cómo se expresa la complejidad?
-
+        // Ejercicio 3: Complejidad O(n × m)
+        System.out.println("\nEjercicio 3: Complejidad O(n × m)");
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 System.out.println(i + j);
             }
         }
-       /*
-        Complejidad temporal: O(n × m)
-        Justificación: El primer bucle recorre n elementos, y para cada uno de ellos el segundo bucle recorre m elementos.
-        Esto provoca un total de n × m iteraciones. Como n y m son parámetros independientes, no se simplifica a O(n²).
-        La operación dentro del bucle interno (System.out.println(i + j)) es de tiempo constante, por lo que no altera
-        la complejidad asintótica.
-        */
+        /*
+         * Complejidad temporal: O(n × m)
+         * Justificación: Bucle externo itera n veces y bucle interno m veces, n y m independientes.
+         */
 
-
-        //Ejercicio 4 ¿Cuál es la complejidad temporal? ¿Qué representa el crecimiento del índice?
+        // Ejercicio 4: Complejidad O(log n)
+        System.out.println("\nEjercicio 4: Complejidad O(log n)");
         for (int i = 1; i < n; i = i * 2) {
             System.out.println(i);
         }
-
         /*
-        Complejidad temporal: O(log n)
-        Justificación: El bucle comienza en i = 1 y, en cada iteración, multiplica i por 2 (i = i * 2). Esto significa
-        que i crece de forma exponencial y el número de iteraciones es igual a la cantidad de veces que podemos duplicar
-        1 antes de alcanzar n.
-        Matemáticamente, esto ocurre log₂(n) veces. La constante de la base del logaritmo no se considera en la notación
-        Big O, por lo que la complejidad se expresa como O(log n).
-        La operación dentro del bucle (System.out.println(i)) es de tiempo constante.
-        */
+         * Complejidad temporal: O(log n)
+         * Justificación: El índice i se multiplica por 2 cada iteración, reduciendo las iteraciones a log2(n).
+         */
 
-
-        //Ejercicio 5 ¿Cuál es la complejidad temporal? ¿Qué representa el crecimiento del índice?
-
+        // Ejercicio 5: Complejidad O(n²)
+        System.out.println("\nEjercicio 5: Complejidad O(n²)");
         int sum = 0;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < i; j++) {
                 sum++;
             }
         }
+        System.out.println("Suma final: " + sum);
         /*
-        Complejidad temporal: O(n²)
-        Justificación: El bucle externo itera n veces. El bucle interno itera un número de veces proporcional al valor
-        actual de i, que en promedio es n/2. La operación dentro del bucle (sum++) es constante, por lo que no altera
-        la complejidad. El crecimiento del tiempo de ejecución es cuadrático respecto a n.
-        */
+         * Complejidad temporal: O(n²)
+         * Justificación: El bucle interno itera i veces, sumando en promedio n/2 iteraciones por ciclo externo.
+         */
 
-        //Ejercicio 6 ¿Cuál es la complejidad temporal de esta función recursiva?
-        public void recursiveFunc(int n) {
-            if (n <= 1) return;
-            recursiveFunc(n - 1);
-        }
-        /*
-        Complejidad temporal: O(n)
-        Justificación: La función realiza una llamada recursiva con n - 1 en cada paso, hasta llegar a 1. Esto genera exactamente
-        n llamadas, cada una con trabajo constante. El tiempo de ejecución crece linealmente con respecto a n.
-        */
+        // Ejercicio 6: Complejidad O(n) - Recursión lineal
+        System.out.println("\nEjercicio 6: Complejidad O(n)");
+        recursiveFuncLineal(n);
 
-        //Ejercicio 7 ¿Cuál es la complejidad temporal? ¿Cómo afecta la división por 2?
-        public void recursiveFunc(int n) {
-            if (n <= 1) return;
-            recursiveFunc(n / 2);
-        }
-        /*
-        Complejidad temporal: O(log n)
-        Justificación: La función divide n por 2 en cada llamada, reduciendo el problema de tamaño n a tamaño n/2 hasta
-        llegar a 1. Esto genera un número de llamadas proporcional a log (n), y cada una realiza trabajo constante.
-        El crecimiento del tiempo de ejecución es logarítmico respecto a n.
-        */
+        // Ejercicio 7: Complejidad O(log n) - Recursión logarítmica
+        System.out.println("\nEjercicio 7: Complejidad O(log n)");
+        recursiveFuncLog(n);
+    }
+
+    /**
+     * Función recursiva lineal: se llama con n-1 hasta llegar a 1.
+     * Complejidad O(n)
+     */
+    public static void recursiveFuncLineal(int n) {
+        if (n <= 1) return;
+        System.out.println("Llamada recursiva con n = " + n);
+        recursiveFuncLineal(n - 1);
+    }
+
+    /**
+     * Función recursiva logarítmica: se llama con n/2 hasta llegar a 1.
+     * Complejidad O(log n)
+     */
+    public static void recursiveFuncLog(int n) {
+        if (n <= 1) return;
+        System.out.println("Llamada recursiva con n = " + n);
+        recursiveFuncLog(n / 2);
     }
 }
