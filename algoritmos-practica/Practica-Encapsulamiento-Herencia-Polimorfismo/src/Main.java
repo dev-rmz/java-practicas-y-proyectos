@@ -1,90 +1,114 @@
-
-/* Ejercicio 1 - Crea una clase CuentaBancaria con los siguientes atributos privados: titular (String), saldo (double)
-Agregá métodos públicos para: Obtener el titular y saldo, Depositar un monto (solo si es positivo), Retirar un monto
-(solo si hay saldo suficiente) Probalo desde un main() creando una cuenta, depositando y retirando dinero.
-
-Ejercicio 2 - Validaciones: Modificá la clase anterior para que: No permita saldo negativo al crear la cuenta
-Si se intenta retirar más de lo disponible, que muestre un mensaje y no reste.
-
-Ejercicio 3 - Clase Empleado y Gerente. Creá una clase Empleado con: nombre y sueldoBase Método mostrarInformacion()
-Creá una clase Gerente que herede de Empleado y tenga: bono como atributo adicional Redefiní mostrarInformacion() para
-que muestre también el bono y el sueldo total. Probalo desde main() con un Empleado y un Gerente.
-
-Ejercicio 5 - Zoológico (Overriding) Clase Animal con método hacerSonido() Clases hijas: Perro, Gato, Vaca, cada una
-sobrescribiendo hacerSonido() En el main(), creá un array/lista de Animal y guardá instancias de cada uno.
-Usá un for para recorrerlos y llamar a hacerSonido()
-
-Ejercicio 6 - Calculadora (Overloading) Crea una clase Calculadora con varios métodos sumar(): sumar(int, int)
-sumar(double, double) sumar(int, int, int) Mostrá cómo funciona la sobrecarga de métodos.*/
-
 import java.util.Scanner;
 import java.util.ArrayList;
 
-class Calculadora{
+/**
+ * Clase Calculadora que muestra sobrecarga de métodos sumar()
+ */
+class Calculadora {
+    // Suma dos enteros
     public int suma(int a, int b){
         return a + b;
     }
+    // Suma dos números double
     public double suma(double a, double b){
         return a + b;
     }
+    // Suma tres enteros
     public int suma(int a, int b, int c){
         return a + b + c;
     }
 }
-class Animal{
+
+/**
+ * Clase base Animal con método hacerSonido()
+ */
+class Animal {
     public void hacerSonido(){
         System.out.println("Animal hacer sonido.");
     }
 }
-class Perro extends Animal{
+
+/**
+ * Clase Perro que sobrescribe hacerSonido()
+ */
+class Perro extends Animal {
     @Override
     public void hacerSonido() {
         System.out.println("Guau!");
     }
 }
-class Gato extends Animal{
+
+/**
+ * Clase Gato que sobrescribe hacerSonido()
+ */
+class Gato extends Animal {
     @Override
     public void hacerSonido() {
         System.out.println("Miau!");
     }
 }
-class Vaca extends Animal{
+
+/**
+ * Clase Vaca que sobrescribe hacerSonido()
+ */
+class Vaca extends Animal {
     @Override
     public void hacerSonido() {
         System.out.println("Muu!");
     }
 }
-class Empleado{
+
+/**
+ * Clase Empleado con atributos nombre y sueldoBase
+ */
+class Empleado {
     private String nombre;
     private double sueldoBase;
 
+    // Constructor que inicializa nombre y sueldoBase
     public Empleado(String nombre){
         this.nombre = nombre;
         this.sueldoBase = 1000;
     }
+
+    // Muestra la información del empleado
     public void mostrarInformacion(){
         System.out.println("Nombre del empleado: " + nombre);
         System.out.println("Sueldo base: " + sueldoBase);
     }
+
+    // Getter para nombre
     public String getNombre(){
         return nombre;
     }
+
+    // Getter para sueldoBase
     public double getSueldoBase(){
         return sueldoBase;
     }
 }
-class Gerente extends Empleado{
+
+/**
+ * Clase Gerente que hereda de Empleado y agrega atributo bono
+ */
+class Gerente extends Empleado {
 
     private double bono;
     private double sueldoTotal;
 
+    // Constructor que inicializa nombre y bono
     public Gerente(String nombre){
         super(nombre);
         this.bono = 500;
     }
+
+    // Calcula el sueldo total sumando sueldoBase y bono
     public double calcularSueldoTotal() {
         return getSueldoBase() + bono;
     }
+
+    // Sobrescribe mostrarInformacion para incluir bono y sueldo total
+    @Override
     public void mostrarInformacion(){
         System.out.println("Nombre del Gerente: " + getNombre());
         System.out.println("Sueldo base: " + getSueldoBase());
@@ -92,29 +116,38 @@ class Gerente extends Empleado{
         System.out.println("Sueldo total: " + calcularSueldoTotal());
     }
 }
+
+/**
+ * Clase CuentaBancaria con validaciones
+ */
 class CuentaBancaria {
 
     private String titular;
     private double saldo;
 
+    // Constructor que verifica que el saldo inicial no sea negativo
     public CuentaBancaria(String titular, double saldo_inicial) {
         this.titular = titular;
         if (saldo_inicial < 0){
             System.out.println("Imposible crear la cuenta, saldo debe ser positivo.");
-        }else {
-            this.saldo += saldo_inicial;
-            System.out.println("Cuenta creada correctamente. Saldo incial: " + saldo);
+            this.saldo = 0;
+        } else {
+            this.saldo = saldo_inicial;
+            System.out.println("Cuenta creada correctamente. Saldo inicial: " + saldo);
         }
     }
 
+    // Getter para titular
     public String getTitular() {
         return titular;
     }
 
+    // Getter para saldo
     public double getSaldo() {
         return saldo;
     }
 
+    // Método para depositar dinero, solo acepta valores positivos
     public void depositar(double deposito) {
         if (deposito > 0) {
             this.saldo += deposito;
@@ -124,6 +157,7 @@ class CuentaBancaria {
         }
     }
 
+    // Método para retirar dinero, valida que haya saldo suficiente
     public double retirar(double retiro) {
         if (this.saldo < retiro) {
             System.out.println("Saldo insuficiente.");
@@ -137,21 +171,34 @@ class CuentaBancaria {
     }
 }
 
+/**
+ * Clase principal para probar todas las funcionalidades
+ */
 public class Main {
     public static void main(String[] args) {
+
+        // Prueba CuentaBancaria
         CuentaBancaria bancoGalicia = new CuentaBancaria("Nicolás", 5);
         bancoGalicia.depositar(10.5);
         System.out.println("Titular: " + bancoGalicia.getTitular());
         System.out.println("Saldo: " + bancoGalicia.getSaldo());
         bancoGalicia.retirar(5);
         bancoGalicia.retirar(6);
-        Empleado empleado_ventas1 = new Empleado("nicolas");
-        empleado_ventas1.mostrarInformacion();
+
         System.out.println();
 
-        Gerente gerente_ventas = new Gerente("martin");
+        // Prueba Empleado y Gerente
+        Empleado empleado_ventas1 = new Empleado("Nicolás");
+        empleado_ventas1.mostrarInformacion();
+
+        System.out.println();
+
+        Gerente gerente_ventas = new Gerente("Martín");
         gerente_ventas.mostrarInformacion();
 
+        System.out.println();
+
+        // Prueba Polimorfismo con animales
         Perro animal1 = new Perro();
         Gato animal2 = new Gato();
         Vaca animal3 = new Vaca();
@@ -164,10 +211,12 @@ public class Main {
             animal.hacerSonido();
         }
 
+        System.out.println();
+
+        // Prueba sobrecarga de métodos en Calculadora
         Calculadora casio = new Calculadora();
         System.out.println("Suma de dos enteros 5 + 5: " + casio.suma(5, 5));
         System.out.println("Suma de dos double 5.5 + 5.5: " + casio.suma(5.5, 5.5));
         System.out.println("Suma de tres enteros 5 + 5 + 5: " + casio.suma(5, 5,5));
-
     }
 }
